@@ -8,7 +8,7 @@ class SocialAdrAPI {
 	public $api = 'http://socialadr.com/api';
 	public $authPage = 'http://socialadr.com/pg/apps/details?id=';
 	public $redirectURI = ''; // The full URL to your Authorized page (redirect URI) goes here
-	public $scope = 'basic url account'; // The space-separated string of app permissions
+	public $scope = 'basic url account fblikes'; // The space-separated string of app permissions
 	public $debug = false;
 	public $accessToken;
 	public $Error;
