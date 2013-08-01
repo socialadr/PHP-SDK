@@ -1,13 +1,14 @@
 <?php
-require (dirname(__FILE__) . '/lib/SocialAdrErrors.php');
+require ('SocialAdrErrors.php');
+
 class SocialAdrAPI {
 	private $appId = '';
 	private $clientId = '';
 	private $clientSecret = '';
-	public $api = 'http://socialadr.dev/api';
-	public $authPage = 'http://socialadr.dev/pg/apps/details?id=';
-	public $redirectURI = 'http://socialadr.dev/api/client/authorized';
-	public $scope = 'url account basic';
+	public $api = 'http://socialadr.com/api';
+	public $authPage = 'http://socialadr.com/pg/apps/details?id=';
+	public $redirectURI = ''; // The full URL to your Authorized page (redirect URI) goes here
+	public $scope = 'basic url account'; // The space-separated string of app permissions
 	public $debug = false;
 	public $accessToken;
 	public $Error;
