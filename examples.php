@@ -47,5 +47,18 @@
 	// Gives detailed history of social submissions for a specific URL
 	$result = $SocialAdr->reportDetail('http://somesite.com/somepage',0,20);
 	print_r($result);
+	
+	//fblikesAdd method
+	// Creates a Facebook Likes Campaign with given package for given bookmark
+	$result = $SocialAdr->fblikesAdd('794101', 1);
+	print_r($result);
+	
+	//fblikesPackages method
+	// Lists all available packages for Facebook Likes Campaigns, including number of likes, and credits required
+	$result = $SocialAdr->fblikesPackages();
+	print_r($results);
+	
+	
+	
 
 ?>
