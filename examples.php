@@ -22,7 +22,12 @@
 	// Validate method
 	// Find out if it's possible to add a URL into the system, before attempting to do so.
 	$result = $SocialAdr->urlValidate('http://somesite.com/somepage');	
-	print_r($result);	
+	print_r($result);
+	
+	// List method
+	// Return a list of bookmarks in an account
+	$result = $SocialAdr->urlList(10);
+	print_r($result);
 	
 	// urlAdd method
 	// Add a new URL that you want to promote.
@@ -57,8 +62,6 @@
 	// Lists all available packages for Facebook Likes Campaigns, including number of likes, and credits required
 	$result = $SocialAdr->fblikesPackages();
 	print_r($results);
-	
-	
 	
 
 ?>
