@@ -130,7 +130,11 @@ class SocialAdrAPI {
         public function resellerSubaccounts(){
             $this->requireAccessToken();
             $endpoint = $this->api . '/oauth/reseller/subaccounts?access_token=' . $this->accessToken;
-            $result = $this->_getRequest($endpoint);
+            $postData = array (
+				'limit' => $limit,
+				'offset' => $offset
+            );
+            $result = $this->_postRequest($endpoint, $postData);
             return $result;
         }
         
