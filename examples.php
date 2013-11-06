@@ -19,6 +19,12 @@
 	$SocialAdr->debug = true;
 	$SocialAdr->setAccessToken($accessToken); 
 
+        // Available Credits method
+        // Get current available credit balance
+        // $SocialAdr->accountCredits();
+        $result = $SocialAdr->accountCredits();
+        print_r($result);
+        
 	// Validate method
 	// Find out if it's possible to add a URL into the system, before attempting to do so.
         // $SocialAdr->urlValidate($url)
@@ -120,6 +126,13 @@
         // $SocialAdr->resellerSubaccounts()
         $results = $SocialAdr->resellerSubaccounts();
         print_r($results);
+        
+        // Reseller Subaccount API call example
+        // You can call any API call for a subaccount by doing the following
+        // $SocialAdr->setSubaccountGUID($subaccount_guid);
+        $SocialAdr->setSubaccountGUID(12345);
+        $result = $SocialAdr->fblikesHistory(10, 0); //Returns fblikesHistory results for reseller subaccount with guid of 12345
+	print_r($results);
         
         
 ?>

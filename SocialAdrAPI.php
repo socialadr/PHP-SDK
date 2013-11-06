@@ -95,6 +95,12 @@ class SocialAdrAPI {
 		$result = $this->_postRequest($endpoint, $postData);
 		return $result;
 	}
+        public function accountCredits(){
+		$this->requireAccessToken();
+		$endpoint = $this->api . '/oauth/account/credits?access_token=' . $this->accessToken;
+		$result = $this->_getRequest($endpoint);
+		return $result;
+        }
 	public function fblikesPackages() {
 		$this->requireAccessToken();
 		$endpoint = $this->api . '/oauth/fblikes/packages?access_token=' . $this->accessToken;
