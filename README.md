@@ -21,6 +21,10 @@ You need to have already followed these steps from the [SocialAdr API Documentat
 
 Clone or download the SocialAdr PHP SDK Github repository to get started:
 
+`git clone https://github.com/socialadr/PHP-SDK.git`
+
+or
+
 https://github.com/socialadr/PHP-SDK/archive/master.zip
 
 ## Start Developing
@@ -28,22 +32,22 @@ https://github.com/socialadr/PHP-SDK/archive/master.zip
 ### Update Variables
 Once you’ve downloaded the SDK, and extracted its contents somewhere within your application, you need to update a few variables inside various files:
 
-#### [SocialAdrAPI.php](../blob/master/SocialAdrAPI.php)
+#### [SocialAdrAPI.php](../master/SocialAdrAPI.php)
 This is the main API class file.
 * $redirectURI (line 14):  the URL on your server that users are redirected to after authorizing your app
 * $scope (line 15):  a space-separated string of app permissions, example: ‘basic url account’
 
-#### [authorized.php](../blob/master/authorized.php)
+#### [authorized.php](../master/authorized.php)
 The Authorized page for your app, as described here.
 * $clientID (line 12):  the Client ID of your app
 * $clientSecret (line 13): the Client Secret Key for your app
 * $appId (line 14): your app’s unique ID
 
-#### [index.php](../blob/master/index.php)
+#### [index.php](../master/index.php)
 The page where you have the button/link for your users to grant your app access to their SocialAdr data.
 * $appId (line 9):  your app’s unique ID
 
-#### [authorized.php](../blob/master/examples.php)
+#### [authorized.php](../master/examples.php)
 Some examples usages of the various API methods.
 * $clientID (line 13):  the Client ID of your app
 * $clientSecret (line 14): the Client Secret Key for your app
@@ -77,7 +81,9 @@ echo '<a href="' . $SocialAdrAPI->getInstallURL() . '">Install</a>';
 ?>
 ```
 ### Authorized Page
-The Authorized page is a landing page that users are sent to after granting your app access to their SocialAdr data. This page is passed a query parameter with an Authorization Code from SocialAdr `http://www.yourapp.com/authorized?code={AUTHORIZATIONCODE}`.
+The Authorized page is a landing page that users are sent to after granting your app access to their SocialAdr data. This page is passed a query parameter with an Authorization Code from SocialAdr. For example:
+
+`http://www.yourapp.com/authorized?code={AUTHORIZATIONCODE}`.
 
 It needs to exchange this Authorization Code for an Access Token. Every API call you make (with the exception of authorization API calls) requires an Access Token.
 
