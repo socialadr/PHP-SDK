@@ -34,25 +34,25 @@ Once you’ve downloaded the SDK, and extracted its contents somewhere within yo
 
 #### [SocialAdrAPI.php](../master/SocialAdrAPI.php)
 This is the main API class file.
-* $redirectURI (line 14):  the URL on your server that users are redirected to after authorizing your app
-* $scope (line 15):  a space-separated string of app permissions, example: ‘basic url account’
+* `$redirectURI` _(line 8)_:  the URL on your server that users are redirected to after authorizing your app
+* `$scope` _(line 9)_:  a space-separated string of app permissions, example: ‘basic url account’
 
 #### [authorized.php](../master/authorized.php)
 The Authorized page for your app, as described here.
-* $clientID (line 12):  the Client ID of your app
-* $clientSecret (line 13): the Client Secret Key for your app
-* $appId (line 14): your app’s unique ID
+* `$clientID` _(line 12)_:  the Client ID of your app
+* `$clientSecret` _(line 13)_: the Client Secret Key for your app
+* `$appId` _(line 14)_: your app’s unique ID
 
 #### [index.php](../master/index.php)
 The page where you have the button/link for your users to grant your app access to their SocialAdr data.
-* $appId (line 9):  your app’s unique ID
+* `$appId` _(line 9)_:  your app’s unique ID
 
 #### [authorized.php](../master/examples.php)
 Some examples usages of the various API methods.
-* $clientID (line 13):  the Client ID of your app
-* $clientSecret (line 14): the Client Secret Key for your app
-* $appId (line 15): your app’s unique ID
-* $accessToken (line 16):  the Access Token for the current user, typically retrieved from your database
+* `$clientID` _(line 13)_:  the Client ID of your app
+* `$clientSecret` _(line 14)_: the Client Secret Key for your app
+* `$appId` _(line 15)_: your app’s unique ID
+* `$accessToken` _(line 16)_:  the Access Token for the current user, typically retrieved from your database
 
 ## Basic SDK Setup
 Now you’re ready to include the SDK into your project. Below is a basic example of including the SocialAdr SDK and instantiating the SocialAdr API class.
