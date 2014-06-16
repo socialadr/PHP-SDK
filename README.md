@@ -10,11 +10,11 @@ This document describes how to use the SocialAdr PHP SDK (Software Development K
 
 You need to have already followed these steps from the [SocialAdr API Documentation](http://socialadr.com/pg/apps/api-docs) doc:
 
-1. [Sign up for the Developer Program](http://socialadr.com/pg/apps/api-docs#h.uxe0wg1ahrf4)
+1. <a href="http://socialadr.com/pg/apps/api-docs#h.uxe0wg1ahrf4" target="_blank">Sign up for the Developer Program</a>
 
-2. [Create an App](http://socialadr.com/pg/apps/api-docs#h.z2dtrdflr73p)
+2. <a href="http://socialadr.com/pg/apps/api-docs#h.z2dtrdflr73p" target="_blank">Create an App</a>
 
-3. [Get the Necessary IDs](http://socialadr.com/pg/apps/api-docs#h.3s6b52buligi)
+3. <a href="http://socialadr.com/pg/apps/api-docs#h.3s6b52buligi" target="_blank">Get the Necessary IDs</a>
 
 
 ## Download SDK
