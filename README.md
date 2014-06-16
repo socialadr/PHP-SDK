@@ -9,36 +9,41 @@ This document describes how to use the SocialAdr PHP SDK (Software Development K
 ## Getting Started
 
 You need to have already followed these steps from the [SocialAdr API Documentation](http://socialadr.com/pg/apps/api-docs) doc:
-1. Sign up for the Developer Program
-2. Create an App
-3. Get the Necessary IDs
+
+1. [Sign up for the Developer Program](http://socialadr.com/pg/apps/api-docs#h.uxe0wg1ahrf4)
+
+2. [Create an App](http://socialadr.com/pg/apps/api-docs#h.z2dtrdflr73p)
+
+3. [Get the Necessary IDs](http://socialadr.com/pg/apps/api-docs#h.3s6b52buligi)
+
 
 ## Download SDK
 
 Clone or download the SocialAdr PHP SDK Github repository to get started:
-https://github.com/socialadr/PHP-SDK
+
+https://github.com/socialadr/PHP-SDK/archive/master.zip
 
 ## Start Developing
 
 ### Update Variables
 Once you’ve downloaded the SDK, and extracted its contents somewhere within your application, you need to update a few variables inside various files:
 
-#### SocialAdrAPI.php
+#### [SocialAdrAPI.php](../blob/master/SocialAdrAPI.php)
 This is the main API class file.
 * $redirectURI (line 14):  the URL on your server that users are redirected to after authorizing your app
 * $scope (line 15):  a space-separated string of app permissions, example: ‘basic url account’
 
-#### authorized.php
+#### [authorized.php](../blob/master/authorized.php)
 The Authorized page for your app, as described here.
 * $clientID (line 12):  the Client ID of your app
 * $clientSecret (line 13): the Client Secret Key for your app
 * $appId (line 14): your app’s unique ID
 
-#### index.php
+#### [index.php](../blob/master/index.php)
 The page where you have the button/link for your users to grant your app access to their SocialAdr data.
 * $appId (line 9):  your app’s unique ID
 
-#### examples.php
+#### [authorized.php](../blob/master/examples.php)
 Some examples usages of the various API methods.
 * $clientID (line 13):  the Client ID of your app
 * $clientSecret (line 14): the Client Secret Key for your app
@@ -72,18 +77,11 @@ echo '<a href="' . $SocialAdrAPI->getInstallURL() . '">Install</a>';
 ?>
 ```
 ### Authorized Page
-The Authorized page is a landing page that users are sent to after granting your app access to their SocialAdr data. This page is passed a query parameter with an Authorization Code from SocialAdr (Figure 1).
+The Authorized page is a landing page that users are sent to after granting your app access to their SocialAdr data. This page is passed a query parameter with an Authorization Code from SocialAdr `http://www.yourapp.com/authorized?code={AUTHORIZATIONCODE}`.
 
 It needs to exchange this Authorization Code for an Access Token. Every API call you make (with the exception of authorization API calls) requires an Access Token.
 
-You’ll want to store the Access Token in your applications database for making future API calls on behalf of the authorized user. Below is an example of exchanging the Authorization Code for an Access Token using the SDK (Figure 2).
-
-**Figure 1**
-```
-http://www.yourapp.com/authorized?code=AUTHORIZATIONCODE
-```
-
-**Figure 2**
+You’ll want to store the Access Token in your applications database for making future API calls on behalf of the authorized user. Below is an example of exchanging the Authorization Code for an Access Token using the SDK.
 
 ```php
 <?php
@@ -102,6 +100,7 @@ if($result){
 }
 ?>
 ```
+
 ### Refreshing Access Tokens
 Access tokens expire after a set period of time. When you receive an Access Token, you should also be given a Refresh Token. You will want to save both. The Refresh Token is used to get a new Access Token when it has expired.
 ```php
@@ -122,7 +121,7 @@ if($result){
 ```
 
 ### Start making API Calls
-Once you have stored the Access Token, you are ready to make your first API call. In the example below, we are using our Access Token to make the urlValidate() API call. The complete list of API methods is available here.
+Once you have stored the Access Token, you are ready to make your first API call. In the example below, we are using our Access Token to make the `urlValidate()` API call. The complete list of API methods is available [here](http://socialadr.com/pg/apps/api-methods).
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
@@ -158,9 +157,12 @@ $errorsObj = $SocialAdrAPI->errors('object'); //Returns an array of error object
 ?>
 ```
 ## Examples
+
 ### Validate URL
 Find out if it’s possible to add a URL into the system, before attempting to do so.
-urlValidate($url)
+
+`urlValidate($url)`
+
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
@@ -176,7 +178,9 @@ else{
 ```
 ### List Bookmarks
 Return a list of bookmarks in an account
-urlList($limit=100,$offset=0,$sort=’guid’,$sort_direction=’asc’)
+
+`urlList($limit=100,$offset=0,$sort=’guid’,$sort_direction=’asc’)`
+
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
@@ -185,9 +189,12 @@ $result = $SocialAdrAPI->urlList(10);
 print_r($result);
 ?>
 ```
+
 ### Add URL
 Add a new URL that you want to promote.
-urlAdd(SocialAdrURL $url)
+
+`urlAdd(SocialAdrURL $url)`
+
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
@@ -205,9 +212,12 @@ $myURL->submitLimit = 20;
 $result = $SocialAdr->urlAdd($myURL);
 ?>
 ```
+
 ### Overview Report
 Gives an overview of the latest social submissions for all URLs in an account.
-reportOverview($offset=0, $limit=10)
+
+`reportOverview($offset=0, $limit=10)`
+
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
@@ -218,7 +228,9 @@ $report = $SocialAdrAPI->reportOverview(0, 50);
 ```
 ### Detail Report
 Gives detailed history of social submissions for a specific URL
-reportDetail($url,$limit=10,$offset=0)
+
+`reportDetail($url,$limit=10,$offset=0)`
+
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
@@ -229,9 +241,12 @@ print_r($result);
 
 ?>
 ```
+
 ### Facebook Likes - Get Packages
 Lists all available packages for Facebook Likes Campaigns, including number of Likes, and credits required.
-fblikesPackages()
+
+`fblikesPackages()`
+
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
@@ -242,7 +257,9 @@ $report = $SocialAdrAPI->fblikesPackages();
 ```
 ### Facebook Likes - Add Campaign
 Creates a Facebook Likes Campaign for a specific package and bookmark
-fblikesAdd($bookmark_guid, $package_id)
+
+`fblikesAdd($bookmark_guid, $package_id)`
+
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
@@ -253,7 +270,8 @@ $report = $SocialAdrAPI->fblikesAdd(102832, 2);
 ```
 ### Reseller - Add Subaccount
 Creates a Socialadr Account under the control of the reseller
-resellerAdd($SocialAdrSubaccount)
+
+`resellerAdd($SocialAdrSubaccount)`
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
@@ -273,11 +291,11 @@ $addSub = $SocialAdr->resellerAdd($subaccount);
 ?>
 ```
 
-
-
 ### Reseller - Transfer Credits to Subaccount
 Transfers credits from the reseller account to the subaccount
-resellerCredits($subaccount_guid, $credits)
+
+`resellerCredits($subaccount_guid, $credits)`
+
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
@@ -287,9 +305,3 @@ $SocialAdr->resellerCredits(103425, 1000); //Transfers 1000 credits to subaccoun
 ?>
 ```
 
-
-
-
-The official PHP SDK for the SocialAdr API.
-
-Documentation available [here](http://socialadr.com/pg/apps/php-sdk)
