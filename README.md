@@ -310,4 +310,34 @@ $SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_A
 $SocialAdr->resellerCredits(103425, 1000); //Transfers 1000 credits to subaccount
 ?>
 ```
+### Twitter Followers - Packages
+Get a list of packages 
 
+`twitterFollowersPackages()`
+
+```php
+$packages = $SocialAdr->twitterFollowersPackages()->response;
+$packages[0]->id //get ID of first package
+```
+
+### Twitter Followers - Add Campaign
+Creates a Facebook Likes Campaign for a specific package and url
+
+`twitterFollowersAdd($url,$package_id)`
+
+```php
+$packages = $SocialAdr->twitterFollowersPackages()->response;
+$SocialAdr->twitterFollowersAdd($url,$packages[0]->id);
+```
+
+### Twitter Followers - History
+Get list of twitter followers campaigns 
+
+`twitterFollowersHistory($limit=100, $offset=0)`
+
+```php
+$campaigns = $SocialAdr->twitterFollowersHistory(50,10); //Get 50 campaigns, starting at the 10th record
+foreach($campaigns as $campaign){
+    ...
+}
+```

@@ -6,7 +6,7 @@ class SocialAdrAPI
     public $api = 'http://socialadr.com/api';
     public $authPage = 'http://socialadr.com/pg/apps/details?id=';
     public $redirectURI = '';
-    public $scope = 'basic url account fblikes';
+    public $scope = 'basic url account fblikes twitter';
     public $debug = false;
     public $accessToken; // The full URL to your Authorized page (redirect URI) goes here
     public $Error; // The space-separated string of app permissions
@@ -131,17 +131,19 @@ class SocialAdrAPI
     private function _curlOptions($ch, $rType, $endpoint, $data)
     {
         $data = $this->addSubaccountData($data);
-        curl_setopt_array($ch, array(
+        $curlOptions = array(
             CURLOPT_URL => $endpoint,
             CURLOPT_HEADER => false,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => count($data),
-            CURLOPT_POSTFIELDS => $data,
+            CURLOPT_POST => $rType == "POST",
+            CURLOPT_POSTFIELDS => count($data) > 0 ? $data : false,
+            CURLOPT_HTTPGET => $rType == "GET",
             CURLOPT_SSL_VERIFYPEER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_TIMEOUT => 20,
             CURLOPT_PORT => 80
-        ));
+        );
+        curl_setopt_array($ch, $curlOptions);
         return $data;
     }
 
@@ -175,7 +177,7 @@ class SocialAdrAPI
     {
         $this->requireAccessToken();
         $endpoint = $this->api . '/oauth/account/credits?access_token=' . $this->accessToken;
-        $result = $this->_getRequest($endpoint);
+        $result = $this->_postRequest($endpoint);
         return $result;
     }
 
@@ -384,6 +386,31 @@ class SocialAdrAPI
         );
         $endpoint = $this->api . '/oauth/reports/overview?access_token=' . $this->accessToken;
         $result = $this->_postRequest($endpoint, $postData);
+        return $result;
+    }
+
+    public function twitterFollowersAdd($url, $package){
+        $this->requireAccessToken();
+        $postData = array(
+            'url' => $url,
+            'package' => $package
+        );
+        $endpoint = $this->api . '/oauth/twitter/followers/add?access_token=' . $this->accessToken;
+        $result = $this->_postRequest($endpoint, $postData);
+        return $result;
+    }
+
+    public function twitterFollowersPackages(){
+        $this->requireAccessToken();
+        $endpoint = $this->api . '/oauth/twitter/followers/packages?access_token=' . $this->accessToken;
+        $result = $this->_getRequest($endpoint);
+        return $result;
+    }
+
+    public function twitterFollowersHistory(){
+        $this->requireAccessToken();
+        $endpoint = $this->api . '/oauth/twitter/followers/history?access_token=' . $this->accessToken;
+        $result = $this->_postRequest($endpoint);
         return $result;
     }
 
