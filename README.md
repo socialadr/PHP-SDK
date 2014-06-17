@@ -360,7 +360,7 @@ if($sendCredits->success){
 ```
 
 ### Reseller - Control Subaccount
-You can execute almost any API call as one of your subaccounts. Once `setSubaccountGUID()` has been set, every API call from that point on will be executed as your subaccount.
+You can execute almost any API call as one of your subaccounts. Once `setSubaccountGUID()` has been set, every API call from that point in the code will be executed as your subaccount.
 `setSubaccountGUID($guid)`
 
 ```php
@@ -373,6 +373,7 @@ If you want to go back to making API calls from your account, set the subaccount
 ```php
 $SocialAdr->setSubaccountGUID(null);
 $SocialAdr->twitterFollowersAdd('https://twitter.com/someaccount', 1);
+
 ## Twitter Followers
 ```
 ### Twitter Followers - Packages
