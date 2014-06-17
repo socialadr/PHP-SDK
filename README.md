@@ -261,9 +261,9 @@ if($archived->success){
 
 
 
-## Reports
+## Report
 
-### Overview Report
+### Report - Overview
 Gives an overview of the latest social submissions for all URLs in an account.
 
 `reportOverview($offset=0, $limit=10)`
@@ -274,7 +274,7 @@ if($report->success){
     $overview = $report->response;
 }
 ```
-### Detail Report
+### Report - Detailed
 Gives detailed history of social submissions for a specific URL
 
 `reportDetail($url,$limit=10,$offset=0)`
