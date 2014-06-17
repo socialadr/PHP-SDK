@@ -200,7 +200,10 @@ $myURL->category = 'arts';
 $myURL->microblog = 'i hp ths fts on twtr';
 $myURL->submitRate = 'fast';
 $myURL->submitLimit = 20;
-$result = $SocialAdr->urlAdd($myURL);
+$addURL = $SocialAdr->urlAdd($myURL);
+if($addURL->success){
+    $url_guid = $addURL->response;
+}
 ```
 
 ### URL - Update
@@ -219,7 +222,10 @@ $myURL->category = 'arts';
 $myURL->microblog = 'i hp ths fts on twtr';
 $myURL->submitRate = 'fast';
 $myURL->submitLimit = 20;
-$result = $SocialAdr->urlUpdate($myURL);
+$updateURL = $SocialAdr->urlUpdate($myURL);
+if($updateURL->success){
+    ...
+}
 ```
 
 ### URL - Delete
@@ -244,6 +250,7 @@ $undelete = $SocialAdr->urlUndelete(399212);
 if($undelete->success){
     ...
 }
+```
 
 ### URL - List Archived
 Get a list of archived URLs
@@ -352,8 +359,22 @@ if($sendCredits->success){
 }
 ```
 
-## Twitter Followers
+### Reseller - Control Subaccount
+You can execute almost any API call as one of your subaccounts. Once `setSubaccountGUID()` has been set, every API call from that point on will be executed as your subaccount.
+`setSubaccountGUID($guid)`
 
+```php
+$SocialAdr->setSubaccountGUID(12345);
+$SocialAdr->twitterFollowersAdd('https://twitter.com/someaccount', 1);
+```
+
+If you want to go back to making API calls from your account, set the subaccount GUID to null.
+
+```php
+$SocialAdr->setSubaccountGUID(null);
+$SocialAdr->twitterFollowersAdd('https://twitter.com/someaccount', 1);
+## Twitter Followers
+```
 ### Twitter Followers - Packages
 Get a list of packages 
 
