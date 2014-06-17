@@ -137,7 +137,6 @@ $SocialAdr = new SocialAdrAPI('YOUR_APP_ID', 'YOUR_CLIENT_SECRET', 'YOUR_CLIENT_
  * would be pulled from your database.
  * We're going to set it inline for this example */
 $storedAccessToken = '82d1cd8228104babce0292497ebbf26fd21fa93c';
-
 $SocialAdr->setAccessToken($storedAccessToken);
 $result = $SocialAdr->urlValidate('http://somesite.com');
 
@@ -149,18 +148,9 @@ If your run into problems, or things don’t appear to be working correctly, you
 <?php
 require_once("/path/to/SocialAdrAPI.php");
 $SocialAdr = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
+$SocialAdr->debug=true;
 $SocialAdr->urlValidate('http://somesite.com'); //Make an API call
-
-$SocialAdr->errors('html'); //Outputs errors to page as HTML
-$SocialAdr->errors(); //Output defaults to HTML as above
-$SocialAdr->errors('text'); //Outputs errors to page as text
-$errorsObj = $SocialAdr->errors('object'); //Returns an array of error objects
-
-// The code above would produce
-// [Error 0] App ID must be set with SocialAdrAPI->setAppId() or in API object instantiation
-// Error Trace:
-// debug_backtrace output from where error was logged
-?>
+//Output will contain cURL and Request/Response data
 ```
 # SDK Examples
 
