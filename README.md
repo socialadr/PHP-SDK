@@ -373,9 +373,10 @@ If you want to go back to making API calls from your account, set the subaccount
 ```php
 $SocialAdr->setSubaccountGUID(null);
 $SocialAdr->twitterFollowersAdd('https://twitter.com/someaccount', 1);
+```
 
 ## Twitter Followers
-```
+
 ### Twitter Followers - Packages
 Get a list of packages 
 
