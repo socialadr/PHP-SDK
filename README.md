@@ -156,7 +156,7 @@ $SocialAdr->urlValidate('http://somesite.com'); //Make an API call
 
 ## URL (Bookmarks)
 
-### Validate URL
+### URL - Validate
 Find out if it’s possible to add a URL into the system, before attempting to do so.
 
 `urlValidate($url)`
@@ -170,7 +170,7 @@ else{
     echo $validateURL->message; //Why it failed
 }
 ```
-### List URLs
+### URL - List
 Return a list of bookmarks in an account
 
 `urlList($limit=100,$offset=0,$sort=’guid’,$sort_direction=’asc’)`
@@ -185,7 +185,7 @@ if($getUrlList->success){
 }
 ```
 
-### Add URL
+### URL - Add
 Add a new URL that you want to promote.
 
 `urlAdd(SocialAdrURL $url)`
@@ -202,6 +202,64 @@ $myURL->submitRate = 'fast';
 $myURL->submitLimit = 20;
 $result = $SocialAdr->urlAdd($myURL);
 ```
+
+### URL - Update
+Update an existing URL,
+
+`urlAdd(SocialAdrURL $url)`
+
+```php
+$myURL = new SocialAdrURL;
+$myURL->guid = 12345;
+$myURL->url = 'http://www.something.com/newpath/';
+$myURL->title = 'API Test';
+$myURL->descr = 'Here is some kind of description or something. I need to make it long enough.';
+$myURL->tags = 'here,are,some,tags';
+$myURL->category = 'arts';
+$myURL->microblog = 'i hp ths fts on twtr';
+$myURL->submitRate = 'fast';
+$myURL->submitLimit = 20;
+$result = $SocialAdr->urlUpdate($myURL);
+```
+
+### URL - Delete
+Delete a URL
+
+`urlDelete($url_guid)`
+
+```php
+$delete = $SocialAdr->urlDelete(399212);
+if($delete->success){
+    ...
+}
+```
+
+### URL - Undelete
+Undelete a URL
+
+`urlUndelete($url_guid)`
+
+```php
+$undelete = $SocialAdr->urlUndelete(399212);
+if($undelete->success){
+    ...
+}
+
+### URL - List Archived
+Get a list of archived URLs
+
+`urlArchived($limit=100, $offset=0)`
+
+```php
+$archived = $SocialAdr->urlArchived(50,0);
+if($archived->success){
+    foreach($archived->response as $url){
+        ...
+    }
+}
+```
+
+
 
 ## Reports
 
