@@ -59,16 +59,16 @@ Now you’re ready to include the SDK into your project. Below is a basic exampl
 
 ```php
 require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
+$SocialAdr = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
 ```
 Alternatively, you can specify your Client ID, App ID, and Client Secret as shown in the example below:
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI();
-$SocialAdrAPI->setAppId('YOUR APP ID');
-$SocialAdrAPI->setClientId('YOUR CLIENT ID');
-$SocialAdrAPI->setClientSecret('YOUR CLIENT SECRET');
+$SocialAdr = new SocialAdrAPI();
+$SocialAdr->setAppId('YOUR APP ID');
+$SocialAdr->setClientId('YOUR CLIENT ID');
+$SocialAdr->setClientSecret('YOUR CLIENT SECRET');
 ?>
 ```
 ### Authorize App Button or Link
@@ -76,8 +76,8 @@ In addition to the ability for users to grant your application access to their d
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-echo '<a href="' . $SocialAdrAPI->getInstallURL() . '">Install</a>';
+$SocialAdr = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
+echo '<a href="' . $SocialAdr->getInstallURL() . '">Install</a>';
 ?>
 ```
 ### Authorized Page
@@ -92,9 +92,9 @@ You’ll want to store the Access Token in your applications database for making
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-$SocialAdrAPI->debug = false;
-$result = $SocialAdrAPI->handleAuth(); //Exchanges Auth Code for Access Token
+$SocialAdr = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
+$SocialAdr->debug = false;
+$result = $SocialAdr->handleAuth(); //Exchanges Auth Code for Access Token
 if($result){
     if($result->error){
         //error handling
@@ -112,7 +112,7 @@ Access tokens expire after a set period of time. When you receive an Access Toke
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
+$SocialAdr = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
 $result = $SocialAdr->refresh($refresh_token);
 if($result){
     if($result->error){
@@ -131,15 +131,15 @@ Once you have stored the Access Token, you are ready to make your first API call
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_APP_ID', 'YOUR_CLIENT_SECRET', 'YOUR_CLIENT_ID');
+$SocialAdr = new SocialAdrAPI('YOUR_APP_ID', 'YOUR_CLIENT_SECRET', 'YOUR_CLIENT_ID');
 
 /* Normally $storedAccessToken
  * would be pulled from your database.
  * We're going to set it inline for this example */
 $storedAccessToken = '82d1cd8228104babce0292497ebbf26fd21fa93c';
 
-$SocialAdrAPI->setAccessToken($storedAccessToken);
-$result = $SocialAdrAPI->urlValidate('http://somesite.com');
+$SocialAdr->setAccessToken($storedAccessToken);
+$result = $SocialAdr->urlValidate('http://somesite.com');
 
 ?>
 ```
@@ -148,13 +148,13 @@ If your run into problems, or things don’t appear to be working correctly, you
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-$SocialAdrAPI->urlValidate('http://somesite.com');
+$SocialAdr = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
+$SocialAdr->urlValidate('http://somesite.com'); //Make an API call
 
-$SocialAdrAPI->errors('html'); //Outputs errors to page as HTML
-$SocialAdrAPI->errors(); //Output defaults to HTML as above
-$SocialAdrAPI->errors('text'); //Outputs errors to page as text
-$errorsObj = $SocialAdrAPI->errors('object'); //Returns an array of error objects
+$SocialAdr->errors('html'); //Outputs errors to page as HTML
+$SocialAdr->errors(); //Output defaults to HTML as above
+$SocialAdr->errors('text'); //Outputs errors to page as text
+$errorsObj = $SocialAdr->errors('object'); //Returns an array of error objects
 
 // The code above would produce
 // [Error 0] App ID must be set with SocialAdrAPI->setAppId() or in API object instantiation
@@ -172,30 +172,27 @@ Find out if it’s possible to add a URL into the system, before attempting to d
 `urlValidate($url)`
 
 ```php
-<?php
-require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-$result = $SocialAdrAPI->urlValidate('http://somesite.com');
-if($result['canAdd']){
+$validateURL = $SocialAdr->urlValidate('http://somesite.com');
+if($validateURL->success){
     //URL Validated
 }
 else{
-    echo $result['reason'];
+    echo $validateURL->message; //Why it failed
 }
-?>
 ```
-### List Bookmarks
+### List URLs
 Return a list of bookmarks in an account
 
 `urlList($limit=100,$offset=0,$sort=’guid’,$sort_direction=’asc’)`
 
 ```php
-<?php
-require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-$result = $SocialAdrAPI->urlList(10);
-print_r($result);
-?>
+$getUrlList = $SocialAdr->urlList(10);
+if($getUrlList->success){
+    $list = $getUrlList->response;
+    foreach($list as $url){
+        ...
+    }
+}
 ```
 
 ### Add URL
@@ -204,10 +201,6 @@ Add a new URL that you want to promote.
 `urlAdd(SocialAdrURL $url)`
 
 ```php
-<?php
-require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-
 $myURL = new SocialAdrURL;
 $myURL->url = 'http://www.something.com/path/';
 $myURL->title = 'API Test';
@@ -218,7 +211,6 @@ $myURL->microblog = 'i hp ths fts on twtr';
 $myURL->submitRate = 'fast';
 $myURL->submitLimit = 20;
 $result = $SocialAdr->urlAdd($myURL);
-?>
 ```
 
 ## Reports
@@ -229,12 +221,10 @@ Gives an overview of the latest social submissions for all URLs in an account.
 `reportOverview($offset=0, $limit=10)`
 
 ```php
-<?php
-require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-
-$report = $SocialAdrAPI->reportOverview(0, 50);
-?>
+$report = $SocialAdr->reportOverview(0, 50);
+if($report->success){
+    $overview = $report->response;
+}
 ```
 ### Detail Report
 Gives detailed history of social submissions for a specific URL
@@ -242,14 +232,10 @@ Gives detailed history of social submissions for a specific URL
 `reportDetail($url,$limit=10,$offset=0)`
 
 ```php
-<?php
-require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-
-$result = $SocialAdrAPI->reportDetail('http://somesite.com/somepage',0,20);
-print_r($result);
-
-?>
+$result = $SocialAdr->reportDetail('http://somesite.com/somepage',0,20);
+if($result->success){
+    $detailed = $result->response;
+}
 ```
 
 ## Facebook Likes
@@ -302,7 +288,6 @@ $subaccount->disable=true;
 $addSub = $SocialAdr->resellerAdd($subaccount);
 if($addSub->success){
     $sub = $addSub->response;
-
 }
 ```
 
