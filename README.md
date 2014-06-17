@@ -316,8 +316,13 @@ Get a list of packages
 `twitterFollowersPackages()`
 
 ```php
-$packages = $SocialAdr->twitterFollowersPackages()->response;
-$packages[0]->id //get ID of first package
+$getPackages = $SocialAdr->twitterFollowersPackages();
+if($getPackages->success){
+    $packages = $getPackages->response;
+    foreach($packages as $package){
+        ...
+    }
+}
 ```
 
 ### Twitter Followers - Add Campaign
@@ -326,8 +331,15 @@ Creates a Facebook Likes Campaign for a specific package and url
 `twitterFollowersAdd($url,$package_id)`
 
 ```php
-$packages = $SocialAdr->twitterFollowersPackages()->response;
-$SocialAdr->twitterFollowersAdd($url,$packages[0]->id);
+$getPackages = $SocialAdr->twitterFollowersPackages();
+if($getPackages->success){
+    $packages = $getPackages->response;
+    $addCampaign = $SocialAdr->twitterFollowersAdd($url,$packages[0]->id);
+    if($addCampaign->success){
+        $campaign_id = $addCampaign->response;
+    }
+}
+
 ```
 
 ### Twitter Followers - History
@@ -336,7 +348,7 @@ Get list of twitter followers campaigns
 `twitterFollowersHistory($limit=100, $offset=0)`
 
 ```php
-$campaigns = $SocialAdr->twitterFollowersHistory(50,10); //Get 50 campaigns, starting at the 10th record
+$campaigns = $SocialAdr->twitterFollowersHistory(50,10); //50 campaigns, starting at 10th record
 foreach($campaigns as $campaign){
     ...
 }
