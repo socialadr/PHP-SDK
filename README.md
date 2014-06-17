@@ -162,7 +162,9 @@ $errorsObj = $SocialAdrAPI->errors('object'); //Returns an array of error object
 // debug_backtrace output from where error was logged
 ?>
 ```
-## Examples
+# SDK Examples
+
+## URL (Bookmarks)
 
 ### Validate URL
 Find out if it’s possible to add a URL into the system, before attempting to do so.
@@ -219,6 +221,8 @@ $result = $SocialAdr->urlAdd($myURL);
 ?>
 ```
 
+## Reports
+
 ### Overview Report
 Gives an overview of the latest social submissions for all URLs in an account.
 
@@ -248,18 +252,18 @@ print_r($result);
 ?>
 ```
 
+## Facebook Likes
+
 ### Facebook Likes - Get Packages
 Lists all available packages for Facebook Likes Campaigns, including number of Likes, and credits required.
 
 `fblikesPackages()`
 
 ```php
-<?php
-require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-
-$report = $SocialAdrAPI->fblikesPackages();
-?>
+$getPackages = $SocialAdr->fblikesPackages();
+if($getPackages->success){
+    $packages = $getPackages->response;
+}
 ```
 ### Facebook Likes - Add Campaign
 Creates a Facebook Likes Campaign for a specific package and bookmark
@@ -267,22 +271,24 @@ Creates a Facebook Likes Campaign for a specific package and bookmark
 `fblikesAdd($bookmark_guid, $package_id)`
 
 ```php
-<?php
-require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-
-$report = $SocialAdrAPI->fblikesAdd(102832, 2);
-?>
+$getPackages = $SocialAdr->fblikesPackages();
+if($getPackages->success){
+    $packages = $getPackages->response;
+    $bookmark_guid = 12345;
+    $addCampaign = $SocialAdr->fblikesAdd($bookmark_guid,$packages[0]->id);
+    if($addCampaign->success){
+        $campaign_id = $addCampaign->response;
+    }
+}
 ```
+
+## Reseller
+
 ### Reseller - Add Subaccount
 Creates a Socialadr Account under the control of the reseller
 
 `resellerAdd($SocialAdrSubaccount)`
 ```php
-<?php
-require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-
 $subaccount = new SocialAdrSubaccount();
 $subaccount->name='mysubaccount';
 $subaccount->credits=5000;
@@ -294,7 +300,10 @@ $subaccount->pinterest=true;
 $subaccount->disable=true;
 
 $addSub = $SocialAdr->resellerAdd($subaccount);
-?>
+if($addSub->success){
+    $sub = $addSub->response;
+
+}
 ```
 
 ### Reseller - Transfer Credits to Subaccount
@@ -303,13 +312,15 @@ Transfers credits from the reseller account to the subaccount
 `resellerCredits($subaccount_guid, $credits)`
 
 ```php
-<?php
-require_once("/path/to/SocialAdrAPI.php");
-$SocialAdrAPI = new SocialAdrAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET', 'YOUR_APP_ID');
-
-$SocialAdr->resellerCredits(103425, 1000); //Transfers 1000 credits to subaccount
-?>
+$subaccount_guid = 12345;
+$sendCredits = $SocialAdr->resellerCredits($subaccount_guid, 1000); //Transfers 1000 credits to subaccount
+if($sendCredits->success){
+    $credits = $sendCredits->response;
+}
 ```
+
+## Twitter Followers
+
 ### Twitter Followers - Packages
 Get a list of packages 
 
@@ -334,6 +345,7 @@ Creates a Facebook Likes Campaign for a specific package and url
 $getPackages = $SocialAdr->twitterFollowersPackages();
 if($getPackages->success){
     $packages = $getPackages->response;
+    $url = 'https://twitter.com/myaccountname';
     $addCampaign = $SocialAdr->twitterFollowersAdd($url,$packages[0]->id);
     if($addCampaign->success){
         $campaign_id = $addCampaign->response;
