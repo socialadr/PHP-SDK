@@ -94,14 +94,14 @@ print_r($result);
 
 // reportOverview method
 // Gives an overview of the latest social submissions for all URLs in an account.
-// $SocialAdr->reportOverview($limit,$offset)
-$result = $SocialAdr->reportOverview(20,0);
+// $SocialAdr->reportOverview($offset,$limit,$)
+$result = $SocialAdr->reportOverview(0,20);
 print_r($result);
 
 // reportDetail method
 // Gives detailed history of social submissions for a specific URL
-// $SocialAdr->reportDetail($url,$limit,$offset)
-$result = $SocialAdr->reportDetail('http://somesite.com/somepage',20,0);
+// $SocialAdr->reportDetail($url,$offset,$limit)
+$result = $SocialAdr->reportDetail('http://somesite.com/somepage',0,20);
 print_r($result);
 
 // fblikesAdd method
