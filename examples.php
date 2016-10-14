@@ -94,7 +94,7 @@ print_r($result);
 
 // reportOverview method
 // Gives an overview of the latest social submissions for all URLs in an account.
-// $SocialAdr->reportOverview($offset,$limit,$)
+// $SocialAdr->reportOverview($offset,$limit)
 $result = $SocialAdr->reportOverview(0,20);
 print_r($result);
 
