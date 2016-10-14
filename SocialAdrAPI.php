@@ -364,25 +364,27 @@ class SocialAdrAPI
         return $result;
     }
 
-    public function reportDetail($url, $offset = 0, $limit = 50)
+    public function reportDetail($url, $offset = 0, $limit = 50, $subaccount_guid = '')
     {
         $this->requireAccessToken();
         $postData = array(
             'url' => $url,
             'offset' => $offset,
-            'limit' => $limit
+            'limit' => $limit,
+            'subaccount_guid' => $subaccount_guid,
         );
         $endpoint = $this->api . '/oauth/reports/detail?access_token=' . $this->accessToken;
         $result = $this->_postRequest($endpoint, $postData);
         return $result;
     }
 
-    public function reportOverview($offset = 0, $limit = 10)
+    public function reportOverview($offset = 0, $limit = 10, $subaccount_guid = '')
     {
         $this->requireAccessToken();
         $postData = array(
             'offset' => $offset,
-            'limit' => $limit
+            'limit' => $limit,
+            'subaccount_guid' => $subaccount_guid,
         );
         $endpoint = $this->api . '/oauth/reports/overview?access_token=' . $this->accessToken;
         $result = $this->_postRequest($endpoint, $postData);
