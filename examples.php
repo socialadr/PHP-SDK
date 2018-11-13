@@ -3,9 +3,9 @@
 /* 
 	Some examples usages of the various API methods
 	
-	The API methods are described in http://socialadr.dev/pg/apps/api-methods
+	The API methods are described in https://socialadr.dev/pg/apps/api-methods
 	
-	To find your Client ID, Client Secret, and App ID, go to http://socialadr.com/pg/apps/manage and click "Manage" for your app
+	To find your Client ID, Client Secret, and App ID, go to https://socialadr.com/pg/apps/manage and click "Manage" for your app
 */
 
 require('SocialAdrAPI.php');
@@ -28,7 +28,7 @@ print_r($result);
 // Validate method
 // Find out if it's possible to add a URL into the system, before attempting to do so.
 // $SocialAdr->urlValidate($url)
-$result = $SocialAdr->urlValidate('http://somesite.com/somepage');
+$result = $SocialAdr->urlValidate('https://somesite.com/somepage');
 print_r($result);
 
 // List method
@@ -41,7 +41,7 @@ print_r($result);
 // Add a new URL that you want to promote.
 // $SocialAdr->urlAdd(SocialAdrURL $url)
 $myURL = new SocialAdrURL;
-$myURL->url = 'http://somesite.com/somepage';
+$myURL->url = 'https://somesite.com/somepage';
 $myURL->title = 'A {great|awesome|cool|fun} webpage';
 $myURL->descr = 'This is the {best|most amazing} {webpage|website} I think I have ever {viewed|looked at|seen} in my entire life! {Highly|Definitely} recommend.';
 $myURL->tags = 'here,are,some tags';
@@ -57,7 +57,7 @@ print_r($result);
 // $SocialAdr->urlUpdate(SocialAdrURL $url)
 $myURL = new SocialAdrURL;
 $myURL->guid = 12345;
-$myURL->url = 'http://somesite.com/somedifferentpage';
+$myURL->url = 'https://somesite.com/somedifferentpage';
 $myURL->title = 'A new {great|awesome|cool|fun} webpage';
 $myURL->descr = 'This is now the {best|most amazing} {webpage|website} I think I have ever {viewed|looked at|seen} in my entire life! {Highly|Definitely} recommend.';
 $myURL->tags = 'here,are,some,new tags';
