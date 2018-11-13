@@ -3,8 +3,8 @@ require('SocialAdrErrors.php');
 
 class SocialAdrAPI
 {
-    public $api = 'http://socialadr.com/api';
-    public $authPage = 'http://socialadr.com/pg/apps/details?id=';
+    public $api = 'https://socialadr.com/api';
+    public $authPage = 'https://socialadr.com/pg/apps/details?id=';
     public $redirectURI = '';
     public $scope = 'basic url account fblikes twitter';
     public $debug = false;
