@@ -4,7 +4,7 @@
 	The Authorized page for your app, 
 	as described https://docs.google.com/document/d/1Un3XLEg0PtCqho68pCGIFJriSn5E9SFm928iOhQ7LCM/edit#heading=h.xscpu2wx3tmn 
 	
-	To find your Client ID, Client Secret, and App ID, go to http://socialadr.com/pg/apps/manage and click "Manage" for your app
+	To find your Client ID, Client Secret, and App ID, go to https://socialadr.com/pg/apps/manage and click "Manage" for your app
 */
 
 	require('SocialAdrAPI.php');
