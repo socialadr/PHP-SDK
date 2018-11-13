@@ -101,7 +101,7 @@ print_r($result);
 // reportDetail method
 // Gives detailed history of social submissions for a specific URL
 // $SocialAdr->reportDetail($url,$offset,$limit)
-$result = $SocialAdr->reportDetail('http://somesite.com/somepage',0,20);
+$result = $SocialAdr->reportDetail('https://somesite.com/somepage',0,20);
 print_r($result);
 
 // fblikesAdd method
