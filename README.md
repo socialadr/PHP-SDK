@@ -83,7 +83,7 @@ echo '<a href="' . $SocialAdr->getInstallURL() . '">Install</a>';
 ### Authorized Page
 The Authorized page is a landing page that users are sent to after granting your app access to their SocialAdr data. This page is passed a query parameter with an Authorization Code from SocialAdr. For example:
 
-`http://www.yourapp.com/authorized?code={AUTHORIZATIONCODE}`.
+`https://www.yourapp.com/authorized?code={AUTHORIZATIONCODE}`.
 
 It needs to exchange this Authorization Code for an Access Token. Every API call you make (with the exception of authorization API calls) requires an Access Token.
 
@@ -127,7 +127,7 @@ if($result){
 ```
 
 ### Start making API Calls
-Once you have stored the Access Token, you are ready to make your first API call. In the example below, we are using our Access Token to make the `urlValidate()` API call. The complete list of API methods is available [here](http://socialadr.com/pg/apps/api-methods).
+Once you have stored the Access Token, you are ready to make your first API call. In the example below, we are using our Access Token to make the `urlValidate()` API call. The complete list of API methods is available [here](https://socialadr.com/pg/apps/api-methods).
 ```php
 <?php
 require_once("/path/to/SocialAdrAPI.php");
