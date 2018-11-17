@@ -140,8 +140,7 @@ class SocialAdrAPI
             CURLOPT_HTTPGET => $rType == "GET",
             CURLOPT_SSL_VERIFYPEER => true,
             CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_TIMEOUT => 20,
-            CURLOPT_PORT => 80
+            CURLOPT_TIMEOUT => 20            
         );
         curl_setopt_array($ch, $curlOptions);
         return $data;
