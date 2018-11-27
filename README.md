@@ -47,7 +47,7 @@ The Authorized page for your app, as described here.
 The page where you have the button/link for your users to grant your app access to their SocialAdr data.
 * `$appId` _(line 9)_:  your app’s unique ID
 
-#### [authorized.php](../master/examples.php)
+#### [examples.php](../master/examples.php)
 Some examples usages of the various API methods.
 * `$clientID` _(line 13)_:  the Client ID of your app
 * `$clientSecret` _(line 14)_: the Client Secret Key for your app
