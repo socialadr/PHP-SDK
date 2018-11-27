@@ -5,11 +5,11 @@ class SocialAdrAPI
 {
     public $api = 'https://socialadr.com/api';
     public $authPage = 'https://socialadr.com/pg/apps/details?id=';
-    public $redirectURI = '';
-    public $scope = 'basic url account fblikes twitter';
+    public $redirectURI = ''; // The full URL to your Authorized page (redirect URI) goes here
+    public $scope = 'basic url account fblikes twitter'; // The space-separated string of app permissions
     public $debug = false;
-    public $accessToken; // The full URL to your Authorized page (redirect URI) goes here
-    public $Error; // The space-separated string of app permissions
+    public $accessToken;
+    public $Error;
     private $appId = '';
     private $clientId = '';
     private $clientSecret = '';
